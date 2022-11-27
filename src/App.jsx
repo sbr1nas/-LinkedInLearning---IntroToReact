@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import Support from "./components/Support";
 import ListCast from "./components/ListCast";
+import Modals from './components/Modals';
 
 function App() {
   const name = "StarGazers";
@@ -19,31 +20,9 @@ function App() {
           </p>
           <ListCast
             onChoice={(info) => {
-              setMemberInfo(info);
-            }}
-          />
-          {memberInfo && (
-            <article>
-              <>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "1rem",
-                  }}
-                >
-                  <img
-                    style={{ width: "200px" }}
-                    src={`images/${memberInfo.slug}.svg`}
-                    alt={memberInfo.name}
-                  />
-                  <hgroup>
-                    <h1>{memberInfo.name}</h1>
-                    <p>{memberInfo.bio}</p>
-                  </hgroup>
-                </div>
-              </>
-            </article>
-          )}
+              setMemberInfo(info)}}/>
+          {memberInfo && <Modals member={memberInfo} handleClose={()=>{setMemberInfo(null)}}/> 
+          }
           <Support />
         </hgroup>
       </article>
