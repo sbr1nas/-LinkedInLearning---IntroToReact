@@ -1,32 +1,36 @@
 import React, { Component, useState } from "react";
 import Support from "./components/Support";
 import ListCast from "./components/ListCast";
-import Modals from './components/Modals';
-import Nav from './components/Nav';
+import Modals from "./components/Modals";
+import Nav from "./components/Nav";
 import { useEffect } from "react";
+import "./App.scss";
 
 function App() {
   const [cast, setCast] = useState([]);
   let [memberInfo, setMemberInfo] = useState(null);
 
-  async function fetchCast(){
-    const response = await fetch('cast.json');
+  async function fetchCast() {
+    const response = await fetch("cast.json");
     setCast(await response.json());
   }
 
   useEffect(() => {
-    fetchCast(); 
+    fetchCast();
   });
-
 
   return (
     <>
-      <Nav cast={cast} onChoice={(info) => {setMemberInfo(info)}} />
+      <Nav
+        cast={cast}
+        onChoice={(info) => {
+          setMemberInfo(info);
+        }}
+      />
       <div className="container">
-        <article>
           <hgroup>
             <img src="images/group.svg" alt="StarGazers Group" />
-            <h1>Meet the Stargzers!</h1>
+            <h1>Meet the Stargazers!</h1>
             <p>
               Members of an <b>intergalactic alliance</b>
               paving the way for peace and benevolence among all species. They
@@ -41,14 +45,16 @@ function App() {
             {memberInfo && (
               <Modals
                 member={memberInfo}
-                handleChange={ (info) => {setMemberInfo(cast[info])} }handleClose={() => {
+                handleChange={(info) => {
+                  setMemberInfo(cast[info]);
+                }}
+                handleClose={() => {
                   setMemberInfo(null);
                 }}
               />
             )}
             <Support />
           </hgroup>
-        </article>
       </div>
     </>
   );
