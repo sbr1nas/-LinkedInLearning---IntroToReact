@@ -41,7 +41,7 @@ function App() {
             {memberInfo && (
               <Modals
                 member={memberInfo}
-                handleClose={() => {
+                handleChange={ (info) => {setMemberInfo(cast[info])} }handleClose={() => {
                   setMemberInfo(null);
                 }}
               />
